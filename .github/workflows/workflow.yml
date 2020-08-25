@@ -3,7 +3,7 @@ on:
   - push
   - pull_request
 jobs:
-  Setup:
+  Test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: true
@@ -26,34 +26,6 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci
-      - uses: actions/cache@v2
-        with:
-          path: lib
-          key: lib-${{ matrix.os }}-${{ github.run_number }}
-  Test:
-    runs-on: ${{ matrix.os }}
-    needs:
-      - Setup
-    strategy:
-      fail-fast: true
-      matrix:
-        os:
-          - ubuntu-latest
-        node:
-          - 14.x
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: node_modules-${{ matrix.os }}-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/cache@v2
-        with:
-          path: lib
-          key: lib-${{ matrix.os }}-${{ github.run_number }}
-      - uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
       - run: npm test
   Publish:
     if: contains(github.ref, 'tags/v')
