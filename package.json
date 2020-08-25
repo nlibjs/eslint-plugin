@@ -17,8 +17,7 @@
     },
     "main": "index.js",
     "files": [
-        "index.js",
-        "index.d.ts"
+        "*.js"
     ],
     "scripts": {
         "test": "node test/*",
