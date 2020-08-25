@@ -10,8 +10,6 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          # - macos-latest
-          # - windows-latest
         node:
           - 14.x
     steps:
@@ -28,12 +26,10 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: npm ci
-      - run: npm install --no-save c8
       - uses: actions/cache@v2
         with:
           path: lib
           key: lib-${{ matrix.os }}-${{ github.run_number }}
-      # - run: npm run build
   Test:
     runs-on: ${{ matrix.os }}
     needs:
@@ -43,11 +39,8 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
-          # - macos-latest
-          # - windows-latest
         node:
           - 14.x
-          # - 12.x
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -61,9 +54,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - run: npx c8 npm test
-      - run: npx c8 report --reporter=text-lcov > coverage.lcov
-      - uses: codecov/codecov-action@v1
+      - run: npm test
   Publish:
     if: contains(github.ref, 'tags/v')
     runs-on: ${{ matrix.os }}
