@@ -1,17 +1,17 @@
-# @nlib/eslint-config
+# @nlib/eslint-plugin
 
-![Test](https://github.com/nlibjs/eslint-config/workflows/Test/badge.svg)
+![Test](https://github.com/nlibjs/eslint-plugin/workflows/Test/badge.svg)
 
 ## Installation and Usage
 
 ```
-npm install --save-dev @nlib/eslint-config
+npm install --save-dev @nlib/eslint-plugin
 ```
 
-You should then add `@nlib/eslint-config` to the `extends` property.
+You should then add `@nlib` to the `plugins` property.
 
 ```json
 {
-  "extends": ["@nlib/eslint-config"]
+  "plugins": ["@nlib"]
 }
 ```
