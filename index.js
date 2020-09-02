@@ -84,7 +84,7 @@ const isDeclared = (scope, name) => {
 };
 
 exports.rules = {
-    'restrict-globals': {
+    'no-globals': {
         meta: {
             type: 'problem',
             schema: [
