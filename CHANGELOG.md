@@ -1,3 +1,12 @@
+## [1.0.5](https://github.com/nlibjs/eslint-plugin/compare/v1.0.4...v1.0.5) (2020-09-02)
+
+
+### Reverts
+
+* disable esm ([f61e3cf](https://github.com/nlibjs/eslint-plugin/commit/f61e3cf479ef653ac69e42de96be374de09eb226))
+
+
+
 ## [1.0.4](https://github.com/nlibjs/eslint-plugin/compare/v1.0.3...v1.0.4) (2020-09-02)
 
 
