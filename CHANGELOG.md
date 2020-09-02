@@ -1,3 +1,12 @@
+## [1.0.6](https://github.com/nlibjs/eslint-plugin/compare/v1.0.5...v1.0.6) (2020-09-02)
+
+
+### Bug Fixes
+
+* the main module ([ff5cc58](https://github.com/nlibjs/eslint-plugin/commit/ff5cc582075fa697c23102db42b2ddc4f8dfac8d))
+
+
+
 ## [1.0.5](https://github.com/nlibjs/eslint-plugin/compare/v1.0.4...v1.0.5) (2020-09-02)
 
 
