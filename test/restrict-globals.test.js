@@ -1,5 +1,5 @@
 const {RuleTester} = require('eslint');
-const plugin = require('../index.cjs');
+const plugin = require('../index.js');
 
 const ruleTester = new RuleTester();
 

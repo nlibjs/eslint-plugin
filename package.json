@@ -15,19 +15,16 @@
     "engines": {
         "node": ">=12"
     },
-    "type": "module",
-    "main": "./index.cjs",
+    "main": "./index.js",
     "exports": {
-        "import": "./index.js",
-        "require": "./index.cjs"
+        ".": "./index.js"
     },
     "files": [
-        "index.cjs",
         "index.js",
         "index.d.ts"
     ],
     "scripts": {
-        "test": "node test/restrict-globals.test.cjs",
+        "test": "node test/restrict-globals.test.js",
         "version:changelog": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file --release-count 0",
         "version:add": "git add .",
         "version": "run-s version:changelog version:add"
