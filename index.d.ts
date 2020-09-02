@@ -10,7 +10,7 @@ interface RuleModule {
         [nodeType: string]: (node: Node) => void,
     },
 }
-declare const plugin: {
+export const rules: {
     'no-globals': RuleModule & {
         meta: {
             type: 'problem',
@@ -32,4 +32,3 @@ declare const plugin: {
     },
     'print-filename': RuleModule,
 };
-export default plugin;
