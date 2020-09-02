@@ -16,12 +16,18 @@
         "node": ">=12"
     },
     "type": "module",
-    "main": "index.js",
+    "main": "./index.cjs",
+    "exports": {
+        "import": "./index.js",
+        "require": "./index.cjs"
+    },
     "files": [
-        "*.js"
+        "index.cjs",
+        "index.js",
+        "index.d.ts"
     ],
     "scripts": {
-        "test": "node test/*",
+        "test": "node test/restrict-globals.test.cjs",
         "version:changelog": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file --release-count 0",
         "version:add": "git add .",
         "version": "run-s version:changelog version:add"

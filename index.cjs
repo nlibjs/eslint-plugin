@@ -83,42 +83,65 @@ const isDeclared = (scope, name) => {
     return isDeclared(scope.upper, name);
 };
 
-export const meta = {
-    type: 'problem',
-    schema: [
-        {
-            type: 'object',
-            propeties: {
-                allowed: {
-                    type: 'array',
-                    items: {type: 'string'},
+module.exports = {
+    'restrict-globals': {
+        meta: {
+            type: 'problem',
+            schema: [
+                {
+                    type: 'object',
+                    propeties: {
+                        allowed: {
+                            type: 'array',
+                            items: {type: 'string'},
+                        },
+                    },
                 },
+            ],
+            messages: {
+                undef: '\'{{name}}\' is not defined. ({{parentType}})',
             },
         },
-    ],
-    messages: {
-        undef: '\'{{name}}\' is not defined. ({{parentType}})',
-    },
-};
-
-export const create = (context) => {
-    const allowed = new Set(context.options.reduce(
-        (concatenated, {allowed = []}) => concatenated.concat(allowed),
-        [],
-    ));
-    return {
-        Identifier: (node) => {
-            if (allowed.has(node.name) || isAllowedIdentifier(node)) {
-                return;
-            }
-            const scope = context.getScope();
-            if (!isDeclared(scope, node.name)) {
-                context.report({
-                    node,
-                    messageId: 'undef',
-                    data: {...node, parentType: node.parent && node.parent.type},
-                });
-            }
+        create: (context) => {
+            const allowed = new Set(context.options.reduce(
+                (concatenated, {allowed = []}) => concatenated.concat(allowed),
+                [],
+            ));
+            return {
+                Identifier: (node) => {
+                    if (allowed.has(node.name) || isAllowedIdentifier(node)) {
+                        return;
+                    }
+                    const scope = context.getScope();
+                    if (!isDeclared(scope, node.name)) {
+                        context.report({
+                            node,
+                            messageId: 'undef',
+                            data: {...node, parentType: node.parent && node.parent.type},
+                        });
+                    }
+                },
+            };
         },
-    };
+    },
+    'print-filename': {
+        create: (context) => {
+            const starts = new Map();
+            return {
+                'Program': () => {
+                    const filename = context.getFilename();
+                    starts.set(filename, process.hrtime());
+                },
+                'Program:exit': () => {
+                    const filename = context.getFilename();
+                    const start = starts.get(filename);
+                    const [s, ns] = process.hrtime(start);
+                    const elapsed = s === 0
+                    ? `${(ns / 1e6).toFixed(3)}ms`
+                    : `${(s + ns / 1e6).toFixed(3)}s`;
+                    console.log(`${filename} (${elapsed})`);
+                },
+            };
+        },
+    },
 };

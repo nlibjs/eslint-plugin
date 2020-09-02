@@ -1,11 +1,11 @@
-import eslint from 'eslint';
-import * as restrictGlobals from '../restrict-globals.js';
+const {RuleTester} = require('eslint');
+const plugin = require('../index.cjs');
 
-const ruleTester = new eslint.RuleTester();
+const ruleTester = new RuleTester();
 
 ruleTester.run(
     'restrict-globals',
-    restrictGlobals,
+    plugin['restrict-globals'],
     {
         valid: [
             {code: '1 + 1'},
