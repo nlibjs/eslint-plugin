@@ -83,43 +83,42 @@ const isDeclared = (scope, name) => {
     return isDeclared(scope.upper, name);
 };
 
-module.exports = {
-    meta: {
-        type: 'problem',
-        schema: [
-            {
-                type: 'object',
-                propeties: {
-                    allowed: {
-                        type: 'array',
-                        items: {type: 'string'},
-                    },
+export const meta = {
+    type: 'problem',
+    schema: [
+        {
+            type: 'object',
+            propeties: {
+                allowed: {
+                    type: 'array',
+                    items: {type: 'string'},
                 },
             },
-        ],
-        messages: {
-            undef: '\'{{name}}\' is not defined. ({{parentType}})',
         },
+    ],
+    messages: {
+        undef: '\'{{name}}\' is not defined. ({{parentType}})',
     },
-    create: (context) => {
-        const allowed = new Set(context.options.reduce(
-            (concatenated, {allowed = []}) => concatenated.concat(allowed),
-            [],
-        ));
-        return {
-            Identifier: (node) => {
-                if (allowed.has(node.name) || isAllowedIdentifier(node)) {
-                    return;
-                }
-                const scope = context.getScope();
-                if (!isDeclared(scope, node.name)) {
-                    context.report({
-                        node,
-                        messageId: 'undef',
-                        data: {...node, parentType: node.parent && node.parent.type},
-                    });
-                }
-            },
-        };
-    },
+};
+
+export const create = (context) => {
+    const allowed = new Set(context.options.reduce(
+        (concatenated, {allowed = []}) => concatenated.concat(allowed),
+        [],
+    ));
+    return {
+        Identifier: (node) => {
+            if (allowed.has(node.name) || isAllowedIdentifier(node)) {
+                return;
+            }
+            const scope = context.getScope();
+            if (!isDeclared(scope, node.name)) {
+                context.report({
+                    node,
+                    messageId: 'undef',
+                    data: {...node, parentType: node.parent && node.parent.type},
+                });
+            }
+        },
+    };
 };

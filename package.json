@@ -15,6 +15,7 @@
     "engines": {
         "node": ">=12"
     },
+    "type": "module",
     "main": "index.js",
     "files": [
         "*.js"
