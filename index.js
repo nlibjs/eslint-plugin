@@ -83,7 +83,7 @@ const isDeclared = (scope, name) => {
     return isDeclared(scope.upper, name);
 };
 
-module.exports = {
+exports.rules = {
     'restrict-globals': {
         meta: {
             type: 'problem',
