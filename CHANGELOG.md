@@ -1,3 +1,12 @@
+## [1.0.7](https://github.com/nlibjs/eslint-plugin/compare/v1.0.6...v1.0.7) (2020-09-02)
+
+
+### Features
+
+* rename the restrict-globals to no-globals ([caa813e](https://github.com/nlibjs/eslint-plugin/commit/caa813e8e24b3d727d52338c8b4c884cdbb6cc81))
+
+
+
 ## [1.0.6](https://github.com/nlibjs/eslint-plugin/compare/v1.0.5...v1.0.6) (2020-09-02)
 
 
