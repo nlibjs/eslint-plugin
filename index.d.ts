@@ -11,7 +11,7 @@ interface RuleModule {
     },
 }
 declare const plugin: {
-    'restrict-globals': RuleModule & {
+    'no-globals': RuleModule & {
         meta: {
             type: 'problem',
             schema: [

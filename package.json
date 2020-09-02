@@ -24,7 +24,7 @@
         "index.d.ts"
     ],
     "scripts": {
-        "test": "node test/restrict-globals.test.js",
+        "test": "node test/no-globals.test.js",
         "version:changelog": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file --release-count 0",
         "version:add": "git add .",
         "version": "run-s version:changelog version:add"

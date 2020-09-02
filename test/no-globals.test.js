@@ -4,8 +4,8 @@ const {rules} = require('../index.js');
 const ruleTester = new RuleTester();
 
 ruleTester.run(
-    'restrict-globals',
-    rules['restrict-globals'],
+    'no-globals',
+    rules['no-globals'],
     {
         valid: [
             {code: '1 + 1'},
