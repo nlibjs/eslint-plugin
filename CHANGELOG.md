@@ -1,6 +1,14 @@
 # Changelog
 
-## v0.1.4 (2020-09-07)
+## v0.1.5 (2020-09-10)
+
+### Bug Fixes
+
+- add a subpath to ./package.json (dc5d102)
+
+### Dependency Upgrades
+
+- @nlib/changelog@0.1.5 (e38ad30)
 
 
 ## v1.0.8 (2020-09-02)
