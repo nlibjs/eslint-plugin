@@ -37,7 +37,7 @@
         "@nlib/changelog": "0.1.9",
         "@nlib/eslint-plugin": "file:.",
         "@nlib/lint-commit": "0.1.3",
-        "@typescript-eslint/eslint-plugin": "4.8.2",
+        "@typescript-eslint/eslint-plugin": "4.9.0",
         "@typescript-eslint/parser": "4.8.2",
         "eslint": "7.14.0",
         "husky": "4.3.0",
