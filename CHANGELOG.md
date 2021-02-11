@@ -1,6 +1,15 @@
 # Changelog
 
-## v0.1.5 (2020-09-10)
+## v1.0.10 (2021-02-11)
+
+### Dependency Upgrades
+
+- uninstall unused packages (c12ae7e)
+- upgrade eslint to v7.16.0 (#31) (f73b3c7)
+- install @nlib/lint-commit (298a868)
+
+
+## v1.0.9 (2020-09-10)
 
 ### Bug Fixes
 
@@ -50,11 +59,7 @@
 
 ### Features
 
-- esm (#3)
-
-* feat: esm
-
-* chore: upgrade dependencies (2ebb9f0)
+- esm (#3) (2ebb9f0)
 
 
 ## v1.0.2 (2020-08-30)
