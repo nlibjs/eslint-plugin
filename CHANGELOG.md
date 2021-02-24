@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0.11 (2021-02-24)
+
+### Bug Fixes
+
+- allow TSClassImplements (78c7bc3)
+
+### Tests
+
+- write in ts (d8b9252)
+
+
 ## v1.0.10 (2021-02-11)
 
 ### Dependency Upgrades
