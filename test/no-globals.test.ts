@@ -1,7 +1,10 @@
-const {RuleTester} = require('eslint');
-const {rules} = require('../index.js');
+import * as path from 'path';
+import {RuleTester} from 'eslint';
+import {rules} from '../index.js';
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester({
+    parser: path.join(__dirname, '../node_modules/@typescript-eslint/parser/dist/index.js'),
+});
 
 ruleTester.run(
     'no-globals',
@@ -12,6 +15,12 @@ ruleTester.run(
             {code: 'undefined;'},
             {code: 'null;'},
             {code: 'Object.assign();', options: [{allowed: ['Object']}]},
+            // {
+            //     code: [
+            //         'interface Foo {}',
+            //         'class Bar implements Foo {}',
+            //     ].join('\n'),
+            // },
         ],
         invalid: [
             {
