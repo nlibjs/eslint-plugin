@@ -46,6 +46,7 @@ const isAllowedIdentifier = (node) => {
     case 'TSIndexSignature':
         return parent.parameters.includes(node);
     case 'TSInterfaceHeritage':
+    case 'TSClassImplements':
         return parent.expression === node;
     case 'RestElement':
         switch (parent.parent && parent.parent.type) {

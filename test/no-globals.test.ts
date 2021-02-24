@@ -15,12 +15,7 @@ ruleTester.run(
             {code: 'undefined;'},
             {code: 'null;'},
             {code: 'Object.assign();', options: [{allowed: ['Object']}]},
-            // {
-            //     code: [
-            //         'interface Foo {}',
-            //         'class Bar implements Foo {}',
-            //     ].join('\n'),
-            // },
+            {code: 'interface Foo {};class Bar implements Foo {}'},
         ],
         invalid: [
             {
