@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.12 (2021-03-27)
+
+### Dependency Upgrades
+
+- @nlib/githooks:0.0.3→0.0.4 @types/eslint:7.2.6→7.2.7 @types/node:14.14.31→14.14.37 @typescript-eslint/parser:4.15.2→4.19.0 eslint:7.20.0→7.23.0 typescript:4.2.2→4.2.3 (0b881a1)
+- pin dependencies (a3ab510)
+
+
 ## v1.0.11 (2021-02-24)
 
 ### Bug Fixes
