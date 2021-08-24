@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.13 (2021-08-24)
+
+### Dependency Upgrades
+
+- @types/node:15.14.7→16.7.1 @typescript-eslint/parser:4.29.2→4.29.3 ts-node:9.1.1→10.2.1 (be270ae)
+- upgrade githooks (5127f25)
+
+
 ## v1.0.12 (2021-03-27)
 
 ### Dependency Upgrades
