@@ -27,16 +27,14 @@
     "scripts": {
         "test": "ts-node test/no-globals.test.ts",
         "version": "run-s version:changelog version:add",
-        "version:changelog": "nlib-changelog --output CHANGELOG.md",
+        "version:changelog": "npx @nlib/changelog --output CHANGELOG.md",
         "version:add": "git add ."
     },
     "peerDependencies": {
-        "eslint": ">= 3"
+        "eslint": ">= 7"
     },
     "devDependencies": {
-        "@nlib/changelog": "0.1.9",
         "@nlib/githooks": "0.0.5",
-        "@nlib/lint-commit": "0.1.4",
         "@types/eslint": "7.28.0",
         "@types/node": "16.7.10",
         "@typescript-eslint/parser": "4.30.0",
