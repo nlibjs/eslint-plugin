@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0.15 (2021-09-05)
+
+### Documentation
+
+- update README ([b8d2f14](https://github.com/nlibjs/eslint-plugin/commit/b8d2f14a1e9a858583d6dc70de380ed2b07c0119))
+
+### Continuous Integration
+
+- fix test workflow ([ca97328](https://github.com/nlibjs/eslint-plugin/commit/ca9732881d0ee7ce7fbfb10027b3dd1fcedad5fb))
+
+
 ## v1.0.14 (2021-09-05)
 
 ### Features
