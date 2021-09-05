@@ -25,6 +25,7 @@
         "index.d.ts"
     ],
     "scripts": {
+        "lint": "eslint index.js index.d.ts test",
         "test": "ts-node test/no-globals.test.ts",
         "version": "run-s version:changelog version:add",
         "version:changelog": "npx @nlib/changelog --output CHANGELOG.md",
@@ -37,12 +38,39 @@
         "@nlib/githooks": "0.0.5",
         "@types/eslint": "7.28.0",
         "@types/node": "16.7.10",
+        "@typescript-eslint/eslint-plugin": "4.30.0",
         "@typescript-eslint/parser": "4.30.0",
         "eslint": "7.32.0",
         "lint-staged": "11.1.2",
         "npm-run-all": "4.1.5",
         "ts-node": "10.2.1",
         "typescript": "4.4.2"
+    },
+    "eslintConfig": {
+        "extends": [
+            "eslint:recommended"
+        ],
+        "parserOptions": {
+            "sourceType": "module"
+        },
+        "env": {
+            "es2020": true,
+            "node": true
+        },
+        "overrides": [
+            {
+                "files": [
+                    "*.ts"
+                ],
+                "extends": [
+                    "plugin:@typescript-eslint/recommended"
+                ],
+                "parser": "@typescript-eslint/parser",
+                "plugins": [
+                    "@typescript-eslint"
+                ]
+            }
+        ]
     },
     "lint-staged": {
         "*.ts": [

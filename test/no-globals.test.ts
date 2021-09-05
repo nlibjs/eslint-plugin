@@ -2,24 +2,61 @@ import * as path from 'path';
 import {RuleTester} from 'eslint';
 import {rules} from '../index.js';
 
-const ruleTester = new RuleTester({
+const tester = new RuleTester({
     parser: path.join(__dirname, '../node_modules/@typescript-eslint/parser/dist/index.js'),
 });
 
-ruleTester.run(
+tester.run(
     'no-globals',
     rules['no-globals'],
     {
         valid: [
             {code: '1 + 1'},
-            {code: 'undefined;'},
-            {code: 'null;'},
-            {code: 'Object.assign();', options: [{allowed: ['Object']}]},
+            {code: 'undefined'},
+            {code: 'null'},
+            {code: 'NaN'},
+            {code: 'true'},
+            {code: 'false'},
+            {code: 'Object.assign()', options: [{allowed: ['Object']}]},
             {code: 'interface Foo {};class Bar implements Foo {}'},
+            {code: 'const foo: Bar = 0'},
+            {code: 'const foo: Foo.Bar = 0'},
+            {
+                code: 'module.parent',
+                settings: {env: {node: true}},
+            },
+            {
+                code: 'require()',
+                settings: {env: {node: true}},
+            },
+            {
+                code: 'require(__dirname, __filename)',
+                settings: {env: {node: true}},
+            },
         ],
         invalid: [
             {
-                code: 'Object.assign();',
+                code: 'module.parent',
+                errors: ['\'module\' is not defined. (MemberExpression)'],
+            },
+            {
+                code: 'require',
+                errors: ['\'require\' is not defined. (ExpressionStatement)'],
+            },
+            {
+                code: 'require(__dirname, __filename)',
+                errors: [
+                    '\'require\' is not defined. (CallExpression)',
+                    '\'__dirname\' is not defined. (CallExpression)',
+                    '\'__filename\' is not defined. (CallExpression)',
+                ],
+            },
+            {
+                code: 'process.exit(1)',
+                errors: ['\'process\' is not defined. (MemberExpression)'],
+            },
+            {
+                code: 'Object.assign()',
                 errors: ['\'Object\' is not defined. (MemberExpression)'],
             },
         ],

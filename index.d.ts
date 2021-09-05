@@ -4,6 +4,7 @@ interface Option {
 interface Context {
     options: Array<Option>,
 }
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Node {}
 interface RuleModule {
     create: (context: Context) => {

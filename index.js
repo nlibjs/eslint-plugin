@@ -1,16 +1,10 @@
 /**
  * https://github.com/eslint/eslint-scope/blob/master/lib/scope.js
  */
-const reservedKeywords = new Set([
-    'undefined',
-    'Infinity',
-    'NaN',
-    'true',
-    'false',
-]);
 
-const isAllowedIdentifier = (node) => {
-    if (reservedKeywords.has(node.name)) {
+const reservedIdentifiers = new Set(['undefined', 'Infinity', 'NaN', 'true', 'false']);
+const isNonVariableIdentifier = (node) => {
+    if (reservedIdentifiers.has(node.name)) {
         return true;
     }
     const {parent} = node;
@@ -60,28 +54,36 @@ const isAllowedIdentifier = (node) => {
     }
     return false;
 };
-
-const isDeclared = (scope, name) => {
-    if (!scope || scope.type === 'global') {
+const getVariable = (scope, name) => {
+    if (scope) {
+        return scope.set.get(name) || getVariable(scope.upper, name);
+    }
+    return null;
+};
+const isLocallyDeclaredVariable = (variable) => {
+    if (!variable) {
         return false;
     }
-    for (const variable of scope.variables) {
-        if (variable.name === name) {
-            const [definition = {}] = variable.defs;
-            switch (definition.type) {
-            case 'ImportBinding':
-            case 'Parameter':
-            case 'Variable':
-            case 'CatchClause':
-            case 'FunctionName':
-            case 'ClassName':
-                return true;
-            default:
-                return false;
-            }
-        }
+    const [definition = {}] = variable.defs;
+    switch (definition.type) {
+    case 'ImportBinding':
+    case 'Parameter':
+    case 'Variable':
+    case 'CatchClause':
+    case 'FunctionName':
+    case 'ClassName':
+        return true;
+    default:
+        return false;
     }
-    return isDeclared(scope.upper, name);
+};
+const isTypeVariable = (variable) => Boolean(variable && variable.isTypeVariableVariable && !variable.isValueVariable);
+const getGlobalVariableNameList = ({settings: {env = {}} = {}}) => {
+    const globalVariableNameList = [];
+    if (env.node) {
+        globalVariableNameList.push('__dirname', '__filename', 'module', 'require');
+    }
+    return globalVariableNameList;
 };
 
 exports.rules = {
@@ -104,17 +106,21 @@ exports.rules = {
             },
         },
         create: (context) => {
-            const allowed = new Set(context.options.reduce(
+            const allowedVariableNameList = new Set(context.options.reduce(
                 (concatenated, {allowed = []}) => concatenated.concat(allowed),
-                [],
+                getGlobalVariableNameList(context),
             ));
+            const isAllowedIdentifier = (node) => allowedVariableNameList.has(node.name);
             return {
                 Identifier: (node) => {
-                    if (allowed.has(node.name) || isAllowedIdentifier(node)) {
+                    if (isNonVariableIdentifier(node) || isAllowedIdentifier(node)) {
                         return;
                     }
-                    const scope = context.getScope();
-                    if (!isDeclared(scope, node.name)) {
+                    const variable = getVariable(context.getScope(), node.name);
+                    if (isTypeVariable(variable)) {
+                        return;
+                    }
+                    if (!isLocallyDeclaredVariable(variable)) {
                         context.report({
                             node,
                             messageId: 'undef',
