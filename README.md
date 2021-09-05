@@ -1,17 +1,7 @@
 # @nlib/eslint-plugin
 
-![Test](https://github.com/nlibjs/eslint-plugin/workflows/Test/badge.svg)
+[![Test](https://github.com/nlibjs/eslint-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/nlibjs/eslint-plugin/actions/workflows/test.yml)
 
 ## Installation and Usage
 
-```
-npm install --save-dev @nlib/eslint-plugin
-```
-
-You should then add `@nlib` to the `plugins` property.
-
-```json
-{
-  "plugins": ["@nlib"]
-}
-```
+See https://github.com/nlibjs/eslint-config .
