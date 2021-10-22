@@ -1,6 +1,21 @@
 # Changelog
 
+## v1.0.16 (2021-10-22)
+
+### Bug Fixes
+
+- accept PropertyDefinition ([d13574d](https://github.com/nlibjs/eslint-plugin/commit/d13574d631e85178c0645fe30e6139ee0c2b83a4))
+
+### Dependency Upgrades
+
+- @nlib/githooks:0.0.5→0.1.0 @types/eslint:7.28.0→7.28.2 @types/node:16.7.10→16.11.3 @typescript-eslint/eslint-plugin:4.30.0→5.1.0 @typescript-eslint/parser:4.30.0→5.1.0 lint-staged:11.1.2→11.2.3 ts-node:10.2.1→10.3.1 typescript:4.4.2→4.4.4 ([00afdbb](https://github.com/nlibjs/eslint-plugin/commit/00afdbb513fe1e0670a4bcdfcfd3abeb831e4a49))
+
+
 ## v1.0.15 (2021-09-05)
+
+### Features
+
+- detect env.node and add global variables ([1106e64](https://github.com/nlibjs/eslint-plugin/commit/1106e6497a12206e5751247a096f40d4ebc6449a))
 
 ### Documentation
 
@@ -9,16 +24,6 @@
 ### Continuous Integration
 
 - fix test workflow ([ca97328](https://github.com/nlibjs/eslint-plugin/commit/ca9732881d0ee7ce7fbfb10027b3dd1fcedad5fb))
-
-
-## v1.0.14 (2021-09-05)
-
-### Features
-
-- detect env.node and add global variables ([1106e64](https://github.com/nlibjs/eslint-plugin/commit/1106e6497a12206e5751247a096f40d4ebc6449a))
-
-### Continuous Integration
-
 - update workflows ([3e8982d](https://github.com/nlibjs/eslint-plugin/commit/3e8982da211a17b7bda5e5b9cb9d98d11eaeb492))
 
 ### Dependency Upgrades
