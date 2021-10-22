@@ -21,6 +21,14 @@ tester.run(
             {code: 'interface Foo {};class Bar implements Foo {}'},
             {code: 'const foo: Bar = 0'},
             {code: 'const foo: Foo.Bar = 0'},
+            {code: [
+                'class Foo {',
+                '    protected readonly foo: string',
+                '    protected constructor() {',
+                '        this.foo = "";',
+                '    }',
+                '}',
+            ].join('\n')},
             {
                 code: 'module.parent',
                 settings: {env: {node: true}},

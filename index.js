@@ -11,6 +11,7 @@ const isNonVariableIdentifier = (node) => {
     switch (parent && parent.type) {
     case 'TSMethodSignature':
         return parent.key === node || parent.params.includes(node);
+    case 'PropertyDefinition':
     case 'Property':
     case 'ClassProperty':
     case 'MethodDefinition':
@@ -51,8 +52,8 @@ const isNonVariableIdentifier = (node) => {
             return false;
         }
     default:
+        return false;
     }
-    return false;
 };
 const getVariable = (scope, name) => {
     if (scope) {
