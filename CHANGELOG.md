@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.18 (2021-12-18)
+
+### Dependency Upgrades
+
+- @types/node:16.11.12→17.0.0 eslint:8.4.1→8.5.0 lint-staged:12.1.2→12.1.3 ([39dd1b3](https://github.com/nlibjs/eslint-plugin/commit/39dd1b3dadac569ba464b9c6ec35f468cf8b72e3))
+
+
 ## v1.0.17 (2021-11-25)
 
 ### Dependency Upgrades
