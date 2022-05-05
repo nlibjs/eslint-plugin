@@ -1,5 +1,21 @@
 # Changelog
 
+## v1.1.0 (2022-05-05)
+
+### Breaking Changes
+
+- use ESM ([caecf23](https://github.com/nlibjs/eslint-plugin/commit/caecf23d335eda208bf3bd4e685d4a97da10195a))
+
+### Bug Fixes
+
+- use createRequire ([d5e7593](https://github.com/nlibjs/eslint-plugin/commit/d5e75937eac37b738a2405cbe331f49fa8375fc8))
+
+### Dependency Upgrades
+
+- update peerDependencies ([5d99d60](https://github.com/nlibjs/eslint-plugin/commit/5d99d60305e8c30e1e328fa5db478a34ad1ff2f5))
+- @types/eslint:8.2.1→8.4.2 @types/node:17.0.0→17.0.31 @typescript-eslint/eslint-plugin:5.7.0→5.22.0 @typescript-eslint/parser:5.7.0→5.22.0 eslint:8.5.0→8.14.0 lint-staged:12.1.3→12.4.1 ts-node:10.4.0→10.7.0 typescript:4.5.4→4.6.4 ([7d35b2b](https://github.com/nlibjs/eslint-plugin/commit/7d35b2b9212c41ee658f25feaaa012d01b5f0f71))
+
+
 ## v1.0.18 (2021-12-18)
 
 ### Dependency Upgrades
