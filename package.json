@@ -16,9 +16,14 @@
         "node": ">=12"
     },
     "type": "module",
-    "main": "./index.mjs",
+    "main": "./index.cjs",
+    "exports": {
+        "import": "./index.mjs",
+        "require": "./index.cjs"
+    },
     "files": [
-        "index.mjs"
+        "index.mjs",
+        "index.cjs"
     ],
     "scripts": {
         "lint": "eslint --ext .mjs index.mjs test",
