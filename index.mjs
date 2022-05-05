@@ -1,6 +1,10 @@
 /**
  * https://github.com/eslint/eslint-scope/blob/master/lib/scope.js
  */
+/** @typedef {{allowed: Array<string>}} Option */
+/** @typedef {{options: Array<Option>}} Context */
+/** @typedef {{}} Node */
+/** @typedef {{create: (context: Context) => {[nodeType: string]: (node: Node) => void}}} RuleModule */
 
 const reservedIdentifiers = new Set(['undefined', 'Infinity', 'NaN', 'true', 'false']);
 const isNonVariableIdentifier = (node) => {
@@ -82,12 +86,13 @@ const isTypeVariable = (variable) => Boolean(variable && variable.isTypeVariable
 const getGlobalVariableNameList = ({settings: {env = {}} = {}}) => {
     const globalVariableNameList = [];
     if (env.node) {
-        globalVariableNameList.push('__dirname', '__filename', 'module', 'require');
+        globalVariableNameList.push('__dirname', '__filename', 'module', 'require', 'import');
     }
     return globalVariableNameList;
 };
 
-exports.rules = {
+/** @type {{'no-globals': RuleModule, 'print-filename': RuleModule}} */
+export const rules = {
     'no-globals': {
         meta: {
             type: 'problem',

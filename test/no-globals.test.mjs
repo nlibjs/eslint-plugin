@@ -1,9 +1,8 @@
-import * as path from 'path';
 import {RuleTester} from 'eslint';
-import {rules} from '../index.js';
+import {rules} from '../index.mjs';
 
 const tester = new RuleTester({
-    parser: path.join(__dirname, '../node_modules/@typescript-eslint/parser/dist/index.js'),
+    parser: new URL('../node_modules/@typescript-eslint/parser/dist/index.js', import.meta.url).pathname,
 });
 
 tester.run(

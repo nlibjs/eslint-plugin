@@ -15,18 +15,14 @@
     "engines": {
         "node": ">=12"
     },
-    "main": "./index.js",
-    "exports": {
-        ".": "./index.js",
-        "./package.json": "./package.json"
-    },
+    "type": "module",
+    "main": "./index.mjs",
     "files": [
-        "index.js",
-        "index.d.ts"
+        "index.mjs"
     ],
     "scripts": {
-        "lint": "eslint index.js index.d.ts test",
-        "test": "ts-node test/no-globals.test.ts",
+        "lint": "eslint index.mjs test",
+        "test": "node test/no-globals.test.mjs",
         "version": "run-s version:changelog version:add",
         "version:changelog": "npx @nlib/changelog --output CHANGELOG.md",
         "version:add": "git add ."
@@ -44,7 +40,6 @@
         "eslint": "8.14.0",
         "lint-staged": "12.4.1",
         "npm-run-all": "4.1.5",
-        "ts-node": "10.7.0",
         "typescript": "4.6.4"
     },
     "eslintConfig": {
