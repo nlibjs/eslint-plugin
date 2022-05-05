@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.1.1 (2022-05-05)
+
+### Bug Fixes
+
+- dual packages ([267c32c](https://github.com/nlibjs/eslint-plugin/commit/267c32ccc2127b90453424fa1f2be0ccd01b74ef))
+
+
 ## v1.1.0 (2022-05-05)
 
 ### Breaking Changes
