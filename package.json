@@ -37,7 +37,7 @@
     },
     "devDependencies": {
         "@nlib/githooks": "0.1.0",
-        "@nlib/lint-commit": "0.1.8",
+        "@nlib/lint-commit": "0.2.0",
         "@types/eslint": "8.4.3",
         "@typescript-eslint/parser": "5.28.0",
         "eslint": "8.18.0",
