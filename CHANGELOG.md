@@ -6,6 +6,20 @@
 
 - dual packages ([267c32c](https://github.com/nlibjs/eslint-plugin/commit/267c32ccc2127b90453424fa1f2be0ccd01b74ef))
 
+### Build System
+
+- version → postversion ([f9f8ff7](https://github.com/nlibjs/eslint-plugin/commit/f9f8ff7b1c2d9aa1594a610d3f215b3c2258c93f))
+
+### Continuous Integration
+
+- drop concurrency option ([6990ce9](https://github.com/nlibjs/eslint-plugin/commit/6990ce965971b32336dc042c1913bb47d4ae5efb))
+- drop 12.x ([33226ed](https://github.com/nlibjs/eslint-plugin/commit/33226ed9cde492a24305ffec627fa4fe271463d9))
+
+### Dependency Upgrades
+
+- npm audit fix ([498d2a2](https://github.com/nlibjs/eslint-plugin/commit/498d2a2d4a78fa56cbe31e06dfa24fa202ae8f6d))
+- lint-staged:12.5.0→13.0.3 ([dec1366](https://github.com/nlibjs/eslint-plugin/commit/dec136675c9ff078a4b2862bb8ca2b08508a7b21))
+
 
 ## v1.1.0 (2022-05-05)
 

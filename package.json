@@ -28,15 +28,15 @@
     "scripts": {
         "lint": "eslint --ext .mjs index.mjs test",
         "test": "node test/no-globals.test.mjs",
-        "postversion": "run-s postversion:*",
-        "postversion:changelog": "nlib-changelog --output CHANGELOG.md",
-        "postversion:add": "git add .",
-        "postversion:amend": "git commit -m \"$(git log -1 --format=%s)\" --amend"
+        "version": "run-s version:*",
+        "version:changelog": "nlib-changelog --output CHANGELOG.md",
+        "version:add": "git add ."
     },
     "peerDependencies": {
         "eslint": ">= 8"
     },
     "devDependencies": {
+        "@nlib/changelog": "0.2.3",
         "@nlib/githooks": "0.1.0",
         "@nlib/lint-commit": "0.2.0",
         "@types/eslint": "8.4.5",
