@@ -1,3 +1,4 @@
+//@ts-check
 import {RuleTester} from 'eslint';
 import {createRequire} from 'node:module';
 import {rules as mjsRules} from '../index.mjs';
@@ -5,9 +6,9 @@ import {rules as cjsRules} from '../index.cjs';
 
 const require = createRequire(import.meta.url);
 const tester = new RuleTester({
-    parser: require.resolve('@typescript-eslint/parser/dist/index.js'),
+    parser: require.resolve('@typescript-eslint/parser'),
 });
-/** @type {import('eslint').RuleTester.ValidTestCase} */
+/** @type {Array<RuleTester.ValidTestCase>} */
 const valid = [
     {code: '1 + 1'},
     {code: 'undefined'},
@@ -40,7 +41,7 @@ const valid = [
         settings: {env: {node: true}},
     },
 ];
-/** @type {import('eslint').RuleTester.InvalidTestCase} */
+/** @type {Array<RuleTester.InvalidTestCase>} */
 const invalid = [
     {
         code: 'module.parent',
@@ -69,3 +70,4 @@ const invalid = [
 ];
 tester.run('no-globals', mjsRules['no-globals'], {valid, invalid});
 tester.run('no-globals', cjsRules['no-globals'], {valid, invalid});
+console.info('passed');
