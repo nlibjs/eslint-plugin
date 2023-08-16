@@ -1,5 +1,5 @@
 //@ts-check
-/** @typedef {import('./type').Rules} Rules */
+/** @typedef {import('./type').RuleModule} RuleModule */
 /** @typedef {import('./type').RuleContext} RuleContext */
 /** @typedef {import('./type').Scope} Scope */
 /** @typedef {import('./type').Variable} Variable */
@@ -137,8 +137,8 @@ const getGlobalVariableNameList = (context) => {
   return globalVariableNameList;
 };
 
-/** @type {Rules} */
 export const rules = {
+  /** @type {RuleModule} */
   'no-globals': {
     meta: {
       type: 'problem',
@@ -195,6 +195,7 @@ export const rules = {
       };
     },
   },
+  /** @type {RuleModule} */
   'print-filename': {
     create: (context) => {
       const starts = new Map();
