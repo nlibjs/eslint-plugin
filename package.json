@@ -1,72 +1,72 @@
 {
-    "name": "@nlib/eslint-plugin",
-    "publishConfig": {
-        "access": "public"
-    },
-    "version": "1.1.1",
-    "license": "Apache-2.0",
-    "author": {
-        "name": "Kei Ito",
-        "email": "kei.itof@gmail.com",
-        "url": "https://github.com/gjbkz"
-    },
-    "homepage": "https://github.com/nlibjs/eslint-plugin",
-    "repository": "https://github.com/nlibjs/eslint-plugin",
-    "engines": {
-        "node": ">=12"
-    },
-    "type": "module",
-    "main": "./index.cjs",
-    "exports": {
-        "import": "./index.mjs",
-        "require": "./index.cjs"
-    },
-    "files": [
-        "index.mjs",
-        "index.cjs"
+  "name": "@nlib/eslint-plugin",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.1.1",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Kei Ito",
+    "email": "kei.itof@gmail.com",
+    "url": "https://github.com/gjbkz"
+  },
+  "homepage": "https://github.com/nlibjs/eslint-plugin",
+  "repository": "https://github.com/nlibjs/eslint-plugin",
+  "engines": {
+    "node": ">=12"
+  },
+  "type": "module",
+  "main": "./index.cjs",
+  "exports": {
+    "import": "./index.mjs",
+    "require": "./index.cjs"
+  },
+  "files": [
+    "index.mjs",
+    "index.cjs"
+  ],
+  "scripts": {
+    "lint": "eslint --ext .mjs index.mjs test",
+    "test": "node test/no-globals.test.mjs",
+    "postversion": "run-s postversion:*",
+    "postversion:changelog": "nlib-changelog --output CHANGELOG.md",
+    "postversion:add": "git add .",
+    "postversion:commit": "git commit --amend --no-edit"
+  },
+  "peerDependencies": {
+    "eslint": ">= 8"
+  },
+  "devDependencies": {
+    "@nlib/changelog": "0.3.0",
+    "@nlib/githooks": "0.1.0",
+    "@nlib/lint-commit": "1.0.0",
+    "@types/eslint": "8.44.2",
+    "@typescript-eslint/parser": "6.4.0",
+    "eslint": "8.47.0",
+    "lint-staged": "14.0.0",
+    "npm-run-all": "4.1.5",
+    "prettier": "3.0.2",
+    "typescript": "5.1.6"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended"
     ],
-    "scripts": {
-        "lint": "eslint --ext .mjs index.mjs test",
-        "test": "node test/no-globals.test.mjs",
-        "postversion": "run-s postversion:*",
-        "postversion:changelog": "nlib-changelog --output CHANGELOG.md",
-        "postversion:add": "git add .",
-        "postversion:commit": "git commit --amend --no-edit"
+    "parserOptions": {
+      "sourceType": "module"
     },
-    "peerDependencies": {
-        "eslint": ">= 8"
-    },
-    "devDependencies": {
-        "@nlib/changelog": "0.3.0",
-        "@nlib/githooks": "0.1.0",
-        "@nlib/lint-commit": "1.0.0",
-        "@types/eslint": "8.44.2",
-        "@typescript-eslint/parser": "6.4.0",
-        "eslint": "8.47.0",
-        "lint-staged": "14.0.0",
-        "npm-run-all": "4.1.5",
-        "typescript": "5.1.6"
-    },
-    "eslintConfig": {
-        "extends": [
-            "eslint:recommended"
-        ],
-        "parserOptions": {
-            "sourceType": "module"
-        },
-        "env": {
-            "es2020": true,
-            "node": true
-        }
-    },
-    "lint-staged": {
-        "*.{ts,tsx,js,mjs,cjs,jsx}": [
-            "eslint"
-        ]
-    },
-    "renovate": {
-        "extends": [
-            "github>nlibjs/renovate-config"
-        ]
+    "env": {
+      "es2020": true,
+      "node": true
     }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "**/*.*(m|c)+(j|t)s*(x)": "eslint"
+  },
+  "renovate": {
+    "extends": [
+      "github>nlibjs/renovate-config"
+    ]
+  }
 }
