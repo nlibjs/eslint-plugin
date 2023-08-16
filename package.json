@@ -28,9 +28,10 @@
     "scripts": {
         "lint": "eslint --ext .mjs index.mjs test",
         "test": "node test/no-globals.test.mjs",
-        "version": "run-s version:*",
-        "version:changelog": "nlib-changelog --output CHANGELOG.md",
-        "version:add": "git add ."
+        "postversion": "run-s postversion:*",
+        "postversion:changelog": "nlib-changelog --output CHANGELOG.md",
+        "postversion:add": "git add .",
+        "postversion:commit": "git commit --amend --no-edit"
     },
     "peerDependencies": {
         "eslint": ">= 8"
