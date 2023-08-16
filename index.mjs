@@ -208,11 +208,13 @@ export const rules = {
           const [s, ns] = process.hrtime(start);
           const elapsed =
             s === 0
-              ? `${(ns / 1e6).toFixed(3)}ms`
-              : `${(s + ns / 1e6).toFixed(3)}s`;
-          console.log(
-            `${context.filename.slice(context.cwd.length)} (${elapsed})`,
-          );
+              ? `${(ns / 1e6).toFixed(3)} ms`
+              : `${(s + ns / 1e6).toFixed(3)} s`;
+          let pathname = context.filename;
+          if (pathname.startsWith(context.cwd)) {
+            pathname = pathname.slice(context.cwd.length).replace(/^\//, '');
+          }
+          console.log(`${pathname} (${elapsed})`);
         },
       };
     },
