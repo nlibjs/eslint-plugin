@@ -1,10 +1,9 @@
-/**
- * https://github.com/eslint/eslint-scope/blob/master/lib/scope.js
- */
-/** @typedef {{allowed: Array<string>}} Option */
-/** @typedef {{options: Array<Option>}} Context */
-/** @typedef {{}} Node */
-/** @typedef {{create: (context: Context) => {[nodeType: string]: (node: Node) => void}}} RuleModule */
+//@ts-check
+/** @typedef {import('./type').Rules} Rules */
+/** @typedef {import('./type').RuleContext} RuleContext */
+/** @typedef {import('./type').Scope} Scope */
+/** @typedef {import('./type').Variable} Variable */
+/** @typedef {import('./type').Identifier} Identifier */
 
 const reservedIdentifiers = new Set([
   'undefined',
@@ -13,17 +12,24 @@ const reservedIdentifiers = new Set([
   'true',
   'false',
 ]);
+
+/**
+ * @param {Identifier} node
+ * @returns {boolean}
+ */
 const isNonVariableIdentifier = (node) => {
   if (reservedIdentifiers.has(node.name)) {
     return true;
   }
   const { parent } = node;
-  switch (parent && parent.type) {
+  if (!parent) {
+    return false;
+  }
+  switch (parent.type) {
     case 'TSMethodSignature':
       return parent.key === node || parent.params.includes(node);
     case 'PropertyDefinition':
     case 'Property':
-    case 'ClassProperty':
     case 'MethodDefinition':
     case 'TSPropertySignature':
       return parent.key === node;
@@ -65,18 +71,30 @@ const isNonVariableIdentifier = (node) => {
       return false;
   }
 };
+
+/**
+ *
+ * @param {Scope | null} scope
+ * @param {string} name
+ * @returns {Variable | null}
+ */
 const getVariable = (scope, name) => {
   if (scope) {
     return scope.set.get(name) || getVariable(scope.upper, name);
   }
   return null;
 };
+
+/**
+ * @param {Variable | null} variable
+ * @returns {boolean}
+ */
 const isLocallyDeclaredVariable = (variable) => {
   if (!variable) {
     return false;
   }
-  const [definition = {}] = variable.defs;
-  switch (definition.type) {
+  const [definition] = variable.defs;
+  switch (definition && definition.type) {
     case 'ImportBinding':
     case 'Parameter':
     case 'Variable':
@@ -88,13 +106,26 @@ const isLocallyDeclaredVariable = (variable) => {
       return false;
   }
 };
-const isTypeVariable = (variable) =>
-  Boolean(
-    variable && variable.isTypeVariableVariable && !variable.isValueVariable,
-  );
-const getGlobalVariableNameList = ({ settings: { env = {} } = {} }) => {
+
+/**
+ * @param {Variable | null} variable
+ * @returns {boolean}
+ */
+const isTypeVariable = (variable) => {
+  if (variable) {
+    //@ts-ignore
+    return variable.isTypeVariableVariable && !variable.isValueVariable;
+  }
+  return false;
+};
+
+/**
+ * @param {RuleContext} context
+ * @returns {Array<string>}
+ */
+const getGlobalVariableNameList = (context) => {
   const globalVariableNameList = [];
-  if (env.node) {
+  if (context.settings?.env?.node) {
     globalVariableNameList.push(
       '__dirname',
       '__filename',
@@ -106,7 +137,7 @@ const getGlobalVariableNameList = ({ settings: { env = {} } = {} }) => {
   return globalVariableNameList;
 };
 
-/** @type {{'no-globals': RuleModule, 'print-filename': RuleModule}} */
+/** @type {Rules} */
 export const rules = {
   'no-globals': {
     meta: {
@@ -133,10 +164,15 @@ export const rules = {
           getGlobalVariableNameList(context),
         ),
       );
+      /**
+       * @param {Identifier} node
+       * @returns {boolean}
+       */
       const isAllowedIdentifier = (node) =>
         allowedVariableNameList.has(node.name);
       return {
         Identifier: (node) => {
+          // @ts-ignore
           if (isNonVariableIdentifier(node) || isAllowedIdentifier(node)) {
             return;
           }
@@ -145,11 +181,15 @@ export const rules = {
             return;
           }
           if (!isLocallyDeclaredVariable(variable)) {
-            context.report({
-              node,
-              messageId: 'undef',
-              data: { ...node, parentType: node.parent && node.parent.type },
-            });
+            /** @type {Record<string, string>} */
+            const data = {};
+            for (const [key, value] of Object.entries(node)) {
+              if (typeof value === 'string') {
+                data[key] = value;
+              }
+            }
+            data.parentType = node.parent && node.parent.type;
+            context.report({ node, messageId: 'undef', data });
           }
         },
       };
@@ -159,19 +199,19 @@ export const rules = {
     create: (context) => {
       const starts = new Map();
       return {
-        Program: () => {
-          const filename = context.getFilename();
-          starts.set(filename, process.hrtime());
+        'Program': () => {
+          starts.set(context.filename, process.hrtime());
         },
         'Program:exit': () => {
-          const filename = context.getFilename();
-          const start = starts.get(filename);
+          const start = starts.get(context.filename);
           const [s, ns] = process.hrtime(start);
           const elapsed =
             s === 0
               ? `${(ns / 1e6).toFixed(3)}ms`
               : `${(s + ns / 1e6).toFixed(3)}s`;
-          console.log(`${filename} (${elapsed})`);
+          console.log(
+            `${context.filename.slice(context.cwd.length)} (${elapsed})`,
+          );
         },
       };
     },
