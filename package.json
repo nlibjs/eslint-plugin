@@ -38,7 +38,7 @@
     "@nlib/githooks": "0.2.2",
     "@nlib/lint-commit": "1.0.1",
     "@types/eslint": "8.56.12",
-    "@types/node": "20.17.9",
+    "@types/node": "20.17.10",
     "@typescript-eslint/parser": "6.21.0",
     "@typescript-eslint/types": "6.21.0",
     "eslint": "8.57.1",
